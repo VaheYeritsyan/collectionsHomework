@@ -2,7 +2,38 @@ package collections;
 
 import java.util.NoSuchElementException;
 
-public class DoublyLinkedList{
+public class DoublyLinkedList {
+
+    public static class Node {
+        private DoublyLinkedList.Node previous;
+        private DoublyLinkedList.Node next;
+        private Student value;
+
+        public Node(Student value) {
+            this.value = value;
+            previous = next = null;
+        }
+
+        public DoublyLinkedList.Node getPrevious() {
+            return previous;
+        }
+
+        public void setPrevious(DoublyLinkedList.Node previous) {
+            this.previous = previous;
+        }
+
+        public DoublyLinkedList.Node getNext() {
+            return next;
+        }
+
+        public void setNext(DoublyLinkedList.Node next) {
+            this.next = next;
+        }
+
+        public Student getValue() {
+            return value;
+        }
+    }
     private Node head;
     private Node tail;
     private int size;
@@ -16,68 +47,74 @@ public class DoublyLinkedList{
     public int size() {
         return size;
     }
-    public boolean isEmpty(){
-        return size==0;
+
+    public boolean isEmpty() {
+        return size == 0;
     }
-    public void push(Student student){
-        Node newNode=new Node(student);
+
+    public void push(Student student) {
+        Node newNode = new Node(student);
         newNode.setNext(head);
-        if(isEmpty()){
-            tail=newNode;
-        }else{
+        if (isEmpty()) {
+            tail = newNode;
+        } else {
             head.setPrevious(newNode);
         }
-        head=newNode;
+        head = newNode;
         size++;
     }
-    public void addLast(Student student){
-        Node newNode=new Node(student);
+
+    public void addLast(Student student) {
+        Node newNode = new Node(student);
         newNode.setPrevious(tail);
-        if(isEmpty()){
-            head=newNode;
-        }else{
+        if (isEmpty()) {
+            head = newNode;
+        } else {
             tail.setNext(newNode);
         }
-        tail=newNode;
+        tail = newNode;
         size++;
     }
-    public Student pop(){
-        if(isEmpty()){
+
+    public Student pop() {
+        if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
         }
-        if(head.getNext()==null){
-            tail=null;
-        }else{
+        if (head.getNext() == null) {
+            tail = null;
+        } else {
             head.getNext().setPrevious(null);
         }
-        Node firstNode=head;
-        head=head.getNext();
+        Node firstNode = head;
+        head = head.getNext();
         firstNode.setNext(null);
         size--;
         return firstNode.getValue();
     }
-    public Student removeLast(){
-        if(isEmpty()){
+
+    public Student removeLast() {
+        if (isEmpty()) {
             throw new NoSuchElementException("The list is empty");
         }
-        if(tail.getPrevious()==null){
-            head=null;
-        }else{
+        if (tail.getPrevious() == null) {
+            head = null;
+        } else {
             tail.getPrevious().setNext(null);
         }
 
-        Node lastNode=tail;
-        tail=tail.getPrevious();
+        Node lastNode = tail;
+        tail = tail.getPrevious();
         lastNode.setPrevious(null);
         size--;
         return lastNode.getValue();
     }
-    public void display(){
-        Node current=head;
-        while (current!=null){
-            System.out.println(current.getValue().getFirstName()+" "+
+
+    public void display() {
+        Node current = head;
+        while (current != null) {
+            System.out.println(current.getValue().getFirstName() + " " +
                     current.getValue().getLastName());
-            current=current.getNext();
+            current = current.getNext();
         }
     }
 }

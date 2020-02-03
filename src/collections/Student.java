@@ -36,13 +36,14 @@ public class Student implements Comparable<Student> {
     public void setAge(int age) {
         this.age = age;
     }
-    public static final Comparator<Student> FirstNameSort=new Comparator<Student>() {
+
+    public static final Comparator<Student> FIRST_NAME_COMPARATOR = new Comparator<Student>() {
         @Override
         public int compare(Student s1, Student s2) {
             return s1.getFirstName().toLowerCase().compareTo(s2.getFirstName().toLowerCase());
         }
     };
-    public static final Comparator<Student> AgeDescendingSort=new Comparator<Student>() {
+    public static final Comparator<Student> AGE_DESCENDING_COMPARATOR = new Comparator<Student>() {
         @Override
         public int compare(Student s1, Student s2) {
             return s2.getAge().compareTo(s1.getAge());
